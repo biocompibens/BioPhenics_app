@@ -1,0 +1,11 @@
+{
+"ctrl_neg":["dmso"],
+"ctrl_pos":[],
+"features":["Cell Count"],
+"spatial_correction":"median polish thouis",
+"sc_parms":{"iteration": 10,"align":"Never","align_method":"All But Controls"},
+"normalization":"robust z score",
+"n_parms":{"population":"ctrl"},
+"selection":"selection by constant",
+"s_parms":{"str_parms":[{"include": null,"feature":"Cell Count","relative":"><","value":2}]}
+}

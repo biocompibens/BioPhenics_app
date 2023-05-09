@@ -1,0 +1,9 @@
+{
+  "ctrl_neg": ["dmso"],
+  "ctrl_pos": ["ctrl_pos"],
+  "features": ["deep learning features"],
+  "normalization": "robust z score",
+  "n_parms":{"population":"ctrl"},
+  "selection":"linear discriminant analysis",
+  "s_parms": {"str_parms": [{"include": "none", "feature":"LDA", "relative":">", "value":3}]}
+}
