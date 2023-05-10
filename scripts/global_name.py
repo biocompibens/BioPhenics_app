@@ -8,10 +8,10 @@ FIELDS_DATA = "Fields"
 """Name of the spreadsheet of the fields data"""
 
 # columns names in all Dataframes created by the program
-REPLICAT = "Replicat"
+REPLICAT = "Replicate"
 """The name of the column indicating the name of the replicat"""
 
-WELLS = "Wells"
+WELLS = "Well"
 """The name of the column indicating the position on the plate"""
 
 ROW = "Row"

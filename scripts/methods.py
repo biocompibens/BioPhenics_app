@@ -486,6 +486,9 @@ class HitSelection(Method):
         (work on one-feature analysis but it's better suited
         for a multivariate analysis)
 
+        a new column is created named as in MAHALANOBIS_DISTANCE or {wavelength}_{MAHALANOBIS_DISTANCE}
+        if INFERENCE_WAVE_BOOL is True
+
         The distance is given by :
 
         :math:`D_M (x) = \\sqrt{(x - \mu)^T S^{-1} (x - \mu)}`,
@@ -553,7 +556,10 @@ class HitSelection(Method):
         Perform a linear discriminant analysis
         to predict the classes of the data.
         There is two class defined by negative and positive control.
-        Therefore a positive control is required !
+        Therefore, a positive control is required !
+
+        a new column is created named as in LDA_COL or {wavelength}_{LDA_COL}
+        if INFERENCE_WAVE_BOOL is True
 
         Ref : `“The Elements of Statistical Learning”,
         Hastie T., Tibshirani R., Friedman J.,

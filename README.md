@@ -7,63 +7,65 @@ Python version : 3.10
 
 Python libraries: pip install -r requirements.txt
 
-This repository contains code used to transform and analyse data from HCS in BioPhenics Platform at Curie Institute.
-The two main scripts are deep_learning.py and normalisation.py
+This repository contains scripts used to transform and analyze HCS data  in a fully automated manner.
+The two main scripts are featurization.py and normalisation.py
 
-### From image to data using deeplearning.py
+### From image to feature using featurization.py
 
-#### Usage : python deeplearning.py input.xlsx output.xlsx
+#### Usage : python featurization.py images.xlsx features.xlsx
 
-This script will use data from input.xlsx to get images. Then pass them through a ResNet as described in *[**article link**](https://doi.org)*.
-It will write the result in output.xlsx.
+This script consumes rows from an input file images.xlsx to get image paths and pass them through a ResNet as described in *[**article link**](https://doi.org)*.
+It will save the output in a file named feature.xlsx.
 
 #### Input.xlsx specification
 
 An example can be found at example/1_input_deepmodule (toy).xlsx. It needs to be an Excel file with a sheet named `Image_path` 
-which contains columns named `Barcode`, `Wells`, `Content` and `Path`. Columns `Fields` and `Wave Length` are optional 
-but if present, data will be concatenated for each value of `Wave Length` and aggregated per values of `Fields`.
-Other columns are ignored. 
+which contains four columns named `Barcode`, `Wells`, `Content` and `Path`. If optional columns `Fields` and `Wave Length` are present, 
+features will be concatenated for each value of `Wave Length` and aggregated per values of `Fields`.
+Additional columns are ignored. 
 
-Note : One can modify the main part of the script to accept other file format (Class needs a Pandas' DataFrame)
+Note : One can modify the main part of the script to accept other file format (underlying class expect a Pandas DataFrame)
 
-### Specific normalization process for HCS data using normalisation.py
+### Feature normalization process for HCS data using normalisation.py
 
-#### Usage : python normalisation.py data.xlsx parameters_file.json output.xlsx
+#### Usage : python analysis.py features.xlsx parameters_file.json selected_hit.xlsx
 
-This script will take an Excel file (example/2_data.xlsx) as first argument, it can be the output of the deeplearning.py script, a parameters file (example/2_parameters.json)
-as second argument and the name of the output (output.xlsx) as third argument.
+This script takes as input an Excel file (example/2_data.xlsx) as first argument, 
+it can be the output of the featurization.py script or of an handmade image analysis, 
+a parameters file (example/2_parameters.json)
+as second argument and the name of the output file (such as "selected_hit.xlsx") as third argument.
 
-#### Data.xlsx specification
+#### features.xlsx specification
 
 An Excel file with a sheet named `All_Data` where its content is disposed in columns.
 
 Mandatory columns :
-- Barcode = unique identifiant per plate
+- Barcode = unique id per plate
 - Plate = unique name per layout (compounds disposition)
-- Wells = plate localization, a letter for row (A-P) and a number for columns (1-24).
+- Well = plate localization, a letter for row (A-P) and a number for columns (1-24).
 - Content = Name of the content
 - Line = Name of the cell line
-- Replicat = Replicate identifier
-- At least one column of feature (will take every column where all values can be assimilated as numbers)
+- Replicate = Replicate identifier
+- At least one column of feature (will take every additional column where all values can be detected as numbers)
 
 Other columns will be ignored.
 
 #### file_parameters.json
 
-A parameters instance will be created with this file. It should be a dict in JSON format, with some key info for normalisation process.
-Value are :
-- ctrl_neg = a list of content name to be considered as negative control.
-- ctrl_pos = a list of content name to be considered as positive control.
-- features = a list of column name to make the normalisation on.
+A json file with some key info for normalization process.
+Dictionary values are :
+- ctrl_neg = a list of sample names to be considered as negative control.
+- ctrl_pos = a list of sample names to be considered as positive control.
+- features = a list of column names to apply the normalization process on. In case of features obtained by featurization.py, the special value '["deep learning feature"]' should be used.
 - spatial_correction = name of the method in ``scripts.methods.CorrectionMethod`` to use as spatial correction method. (underscore can be replaced by space)
-- sc_parms = dict to be passed as parameters to spatial correction method (see list of parameters for the chosen function)
-- normalization = name of the method in ``scripts.methods.NormalisationMethod`` to use as normalization method. (underscore can be replaced by space)
-- n_parms = dict to be passed as parameters to normalization method (see list of parameters for the chosen function)
-- selection = name of the method in ``scripts.methods.HitSelection`` to use as hit selection. (underscore can be replaced by space)
-- s_parms = dict to be passed as parameters to hit selection method. It can contain two values : 
-  - "str_parms" = a list of rule to select hit based of. Each rule comprises 4 values :
+- sc_parms = dict to be passed as parameters to the spatial correction method (see list of parameters for the chosen function)
+- normalization = name of the normalization method in ``scripts.methods.NormalisationMethod`` to be used. (underscore can be replaced by space)
+- n_parms = dict to be passed as parameters to the normalization method (see list of parameters for the chosen function)
+- selection = name of the method in ``scripts.methods.HitSelection`` to be used for hit selection. (underscore can be replaced by space)
+- s_parms = dict to be passed as parameters to the hit selection method. It can contain two values : 
+  - "str_parms" = a list of rules to select hits. Each rule comprises 4 values :
     - 'include' = None, 'and' or 'or' indicate how to pile rules
-    - 'feature' = name of the feature to base the selection on
+    - 'feature' = name of the feature to be used for selection (some hit selection method can output new feature name, ex: "linear discriminant analysis" will output a feature named "LDA". See method documentation for details)
     - 'relative' = '<', '>' or '><' indicate the  direction of the threshold ('><' means outside of [-|x|, |x|])
     - 'value' = threshold of the rule
   - "other_parms" = specific parameters for the chosen function in selection.
