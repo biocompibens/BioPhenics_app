@@ -20,7 +20,7 @@ It will save the output in a file named feature.xlsx.
 #### Input.xlsx specification
 
 An example can be found at example/1_input_deepmodule (toy).xlsx. It needs to be an Excel file with a sheet named `Image_path` 
-which contains four columns named `Barcode`, `Wells`, `Content` and `Path`. If optional columns `Fields` and `Wave Length` are present, 
+which contains four columns named `Barcode`, `Well`, `Content` and `Path`. If optional columns `Fields` and `Wave Length` are present, 
 features will be concatenated for each value of `Wave Length` and aggregated per values of `Fields`.
 Additional columns are ignored. 
 
