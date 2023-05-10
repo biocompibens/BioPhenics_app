@@ -1,6 +1,6 @@
 # Transfer Learning for Versatile Training Free  High Content Screening Analyses
 
-#### *[**Lien vers l'article.**](https://doi.org)*
+#### *[**article link**](https://doi.org)*
 
 ### Requirements 
 Python version : 3.10
@@ -19,7 +19,7 @@ It will write the result in output.xlsx.
 
 #### Input.xlsx specification
 
-It needs to be an Excel file with a sheet named `Image_path` 
+An example can be found at example/1_input_deepmodule (toy).xlsx. It needs to be an Excel file with a sheet named `Image_path` 
 which contains columns named `Barcode`, `Wells`, `Content` and `Path`. Columns `Fields` and `Wave Length` are optional 
 but if present, data will be concatenated for each value of `Wave Length` and aggregated per values of `Fields`.
 Other columns are ignored. 
@@ -30,7 +30,7 @@ Note : One can modify the main part of the script to accept other file format (C
 
 #### Usage : python normalisation.py data.xlsx parameters_file.json output.xlsx
 
-This script will take an Excel file (data.xlsx) as first argument, a parameters file (parameters_file.json)
+This script will take an Excel file (example/2_data.xlsx) as first argument, it can be the output of the deeplearning.py script, a parameters file (example/2_parameters.json)
 as second argument and the name of the output (output.xlsx) as third argument.
 
 #### Data.xlsx specification
