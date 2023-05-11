@@ -37,7 +37,7 @@ as second argument and the name of the output file (such as "selected_hit.xlsx")
 
 #### features.xlsx specification
 
-An Excel file with a sheet named `All_Data` where its content is disposed in columns.
+An Excel file with a sheet named `All_Data`.
 
 Mandatory columns :
 - Barcode = unique id per plate
@@ -52,7 +52,7 @@ Other columns will be ignored.
 
 #### file_parameters.json
 
-A json file with some key info for normalization process.
+A json file with some key info for the normalization process.
 Dictionary values are :
 - ctrl_neg = a list of sample names to be considered as negative control.
 - ctrl_pos = a list of sample names to be considered as positive control.
