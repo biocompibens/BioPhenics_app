@@ -26,7 +26,7 @@ Additional columns are ignored.
 
 Note : One can modify the main part of the script to accept other file format (underlying class expect a Pandas DataFrame)
 
-### Feature normalization process for HCS data using normalisation.py
+### Feature normalization and analysis using analysis.py
 
 #### Usage : python analysis.py features.xlsx parameters_file.json selected_hit.xlsx
 
