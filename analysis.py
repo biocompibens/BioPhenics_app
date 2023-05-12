@@ -367,9 +367,10 @@ class Normalization(object):
         Format the hit page to create an excel sheet with the hitlist
         """
         to_drop = [LABEL]
+        df = self.merged_hitlist if self.merged_hitlist is not None else self.format_hitlist()
 
-        ctrl = self.merged_hitlist[CONTENT].isin(self.parms.ctrl)
-        hits = self.merged_hitlist[self.merged_hitlist[LABEL] | ctrl] if select_hit else self.merged_hitlist
+        ctrl = df[CONTENT].isin(self.parms.ctrl)
+        hits = df[df | ctrl] if select_hit else df
 
         hits = hits.drop(columns=to_drop)
 
