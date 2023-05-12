@@ -57,6 +57,7 @@ Dictionary values are :
 - ctrl_neg = a list of sample names to be considered as negative control.
 - ctrl_pos = a list of sample names to be considered as positive control.
 - features = a list of column names to apply the normalization process on. In case of features obtained by featurization.py, the special value '["deep learning feature"]' should be used.
+- other_parms = a dict of parameters which can contain (among other things) the key `reduced_feature_space` with boolean value (True of False). If True, a PCA is launched on the feature space in order to keep 99% (default value) of the data variability.
 - spatial_correction = name of the method in ``scripts.methods.CorrectionMethod`` to use as spatial correction method. (underscore can be replaced by space)
 - sc_parms = dict to be passed as parameters to the spatial correction method (see list of parameters for the chosen function)
 - normalization = name of the normalization method in ``scripts.methods.NormalisationMethod`` to be used. (underscore can be replaced by space)
