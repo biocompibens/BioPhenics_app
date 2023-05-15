@@ -370,7 +370,8 @@ class Normalization(object):
         df = self.merged_hitlist if self.merged_hitlist is not None else self.format_hitlist()
 
         ctrl = df[CONTENT].isin(self.parms.ctrl)
-        hits = df[df | ctrl] if select_hit else df
+        cond = (df[LABEL] | ctrl) if LABEL in df else ctrl
+        hits = df[cond] if select_hit else df
 
         hits = hits.drop(columns=to_drop)
 
