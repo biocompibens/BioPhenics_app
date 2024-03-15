@@ -1,6 +1,6 @@
 # Transfer Learning for Versatile Training Free  High Content Screening Analyses
 
-#### *[**article link**](https://doi.org)*
+#### *[**Transfer learning for versatile and training free high content screening analyses**](https://doi.org/10.1038/s41598-023-49554-8)*
 
 ### Requirements 
 Python version : 3.10
@@ -14,7 +14,7 @@ The two main scripts are featurization.py and normalisation.py
 
 #### Usage : python featurization.py images.xlsx features.xlsx
 
-This script consumes rows from an input file images.xlsx to get image paths and pass them through a ResNet as described in *[**article link**](https://doi.org)*.
+This script consumes rows from an input file images.xlsx to get image paths and pass them through a ResNet as described in *[**Transfer learning for versatile and training free high content screening analyses**](https://doi.org/10.1038/s41598-023-49554-8)*.
 It will save the output in a file named feature.xlsx.
 
 #### Input.xlsx specification
