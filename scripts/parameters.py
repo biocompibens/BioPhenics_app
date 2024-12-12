@@ -240,15 +240,15 @@ class Parameters(object):
 class OneFeatParms(object):
     @setter_parms(list)
     def ctrl_neg(self, value):
-        self.__dict__["ctrl_neg"] = value
+        self.__dict__["ctrl_neg"] = [v.lower() for v in value]
 
     @setter_parms(list)
     def ctrl_pos(self, value):
-        self.__dict__["ctrl_pos"] = value
+        self.__dict__["ctrl_pos"] = [v.lower() for v in value]
 
     @setter_parms(list)
     def ctrl_other(self, value):
-        self.__dict__["ctrl_other"] = value
+        self.__dict__["ctrl_other"] = [v.lower() for v in value]
 
     @setter_parms(list)
     def features(self, value):
